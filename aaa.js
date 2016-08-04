@@ -1,3 +1,6 @@
+function colorGen(){ 
+    return '#'+Math.floor(Math.random()*16777215).toString(16); 
+}
 
 var basex;
 var flag; //進行方向 1:右 -1:左
@@ -11,7 +14,8 @@ window.onload = function(){
   mybody_y = 130;
   enemybody_y = 130;
   flag2 = 1;
-  Main();
+		poyo = 1;
+		Main();
 };
 
 function Main(){
@@ -56,7 +60,7 @@ function My_body_hit(){
   }
 }
 
-
+var prev = colorGen();;
 function paint(){
   var canvas = document.getElementById("stage");
   var ctx = canvas.getContext('2d');
@@ -64,8 +68,12 @@ function paint(){
 
   ctx.clearRect( 0, 0, 1050, 750);
 
-  ctx.beginPath();
-  ctx.fillStyle = 'rgb( 0, 128, 255)';
+		ctx.beginPath();
+		
+		poyo++;
+		poyo %= 20;
+		if(poyo == 0) prev = colorGen();
+		ctx.fillStyle = prev;
   ctx.arc(200 + basex, 200 + basey, 150, 0, Math.PI * 2, false);
   ctx.fill();
   ctx.stroke();
